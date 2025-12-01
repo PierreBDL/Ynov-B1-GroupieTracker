@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 // Tableau avec toutes les infos données par les APIs
@@ -66,7 +67,26 @@ func main() {
 		afficherAccueil(w, donnees{Artists: artists})
 	})
 
-	// Création du serveur
+	// Route pour la page d'un artiste
+	http.HandleFunc("/artist/", func(w http.ResponseWriter, r *http.Request) {
+		// Récupération des paramètres de l'URL avec net/url
+		parametres := r.URL.Query()
+
+		// Récupération de l'id
+		id := parametres.Get("id")
+
+		// Conversion en int
+		id_int, err := strconv.Atoi(id)
+		if err != nil {
+			// ... handle error
+			panic(err)
+		}
+
+		// Afficher page de l'artiste
+		afficherArtiste(w, donnees{Artists: artists}, id_int)
+	})
+
+	// Lancement serveur
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -74,4 +94,20 @@ func main() {
 func afficherAccueil(w http.ResponseWriter, data donnees) {
 	tmpl := template.Must(template.ParseFiles("../front/templates/index.html"))
 	tmpl.Execute(w, data)
+}
+
+// Afficher page de l'artiste
+func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
+	donneesArtiste := artistes{}
+	// On cherche l'artiste avec l'id
+	for index, artist := range data.Artists {
+		if artist.Id == id {
+			donneesArtiste = data.Artists[index]
+			break
+		}
+	}
+
+	// Affichage de la page de l'artiste
+	tmpl := template.Must(template.ParseFiles("../front/templates/artist.html"))
+	tmpl.Execute(w, donneesArtiste)
 }
