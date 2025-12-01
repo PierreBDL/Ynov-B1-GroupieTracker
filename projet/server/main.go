@@ -8,16 +8,21 @@ import (
 )
 
 // Tableau avec toutes les infos données par les APIs
-var donnees = map[string][]byte{
+var apis = map[string][]byte{
 	"artistes": nil,
 	"lieux":    nil,
 	"dates":    nil,
 	"relation": nil,
 }
 
+// Données envoyées au html
+type donnees struct {
+	Artists []artistes
+}
+
 func main() {
 	// URLs des APIs
-	apis := map[string]string{
+	urlsAPIs := map[string]string{
 		"artistes": "https://groupietrackers.herokuapp.com/api/artists",
 		"lieux":    "https://groupietrackers.herokuapp.com/api/locations",
 		"dates":    "https://groupietrackers.herokuapp.com/api/dates",
@@ -25,7 +30,7 @@ func main() {
 	}
 
 	// Appel de toutes les APIs
-	for nom, url := range apis {
+	for nom, url := range urlsAPIs {
 		fmt.Println("Appel de l'API :", nom)
 		resp, err := http.Get(url)
 		if err != nil {
@@ -40,14 +45,14 @@ func main() {
 			continue
 		}
 
-		fmt.Println(string(body))
+		//fmt.Println(string(body))
 
 		// Ajout des données dans le tableau
-		donnees[nom] = body
+		apis[nom] = body
 	}
 
 	// Parser les artistes
-	ParseArtistes(donnees["artistes"])
+	artists := ParseArtistes(apis["artistes"])
 
 	// Lire fichiers CSS
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("../front/assets"))))
@@ -58,16 +63,15 @@ func main() {
 			http.NotFound(w, r)
 			return
 		}
-		afficherAccueil(w, donnees)
+		afficherAccueil(w, donnees{Artists: artists})
 	})
 
 	// Création du serveur
-	fmt.Println("\nServeur démarré sur http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
 
 // Afficher l'écran d'accueil
-func afficherAccueil(w http.ResponseWriter, donnees map[string][]byte) {
+func afficherAccueil(w http.ResponseWriter, data donnees) {
 	tmpl := template.Must(template.ParseFiles("../front/templates/index.html"))
-	tmpl.Execute(w, donnees)
+	tmpl.Execute(w, data)
 }

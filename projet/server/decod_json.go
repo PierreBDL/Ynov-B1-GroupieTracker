@@ -17,11 +17,13 @@ type artistes struct {
 }
 
 // Parser les artistes
-func ParseArtistes(data_to_parse []byte) {
+func ParseArtistes(data_to_parse []byte) []artistes {
 	var artists []artistes
 	err := json.Unmarshal(data_to_parse, &artists)
 	if err != nil {
 		fmt.Println("error:", err)
-		return
+		return nil
 	}
+	// On retourne la liste des artistes
+	return artists
 }

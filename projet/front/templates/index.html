@@ -24,13 +24,13 @@
 
 
     <main>
-        {{for i, cards := .body}}
+        {{range .Artists}}
         <div class="card">
-            <img src={{cards[i].image}} alt="Artiste" class="card-image">
-            <h3 class="card-title">{{card[i].artiste.name}}</h3>
-            <p class="card-info">Début: Date</p>
-            <p class="card-info">Premier Album: Date</p>
-            <p class="card-info">Membres: 4</p>
+            <img src="{{.Image}}" alt="{{.Name}}" class="card-image">
+            <h3 class="card-title">{{.Name}}</h3>
+            <p class="card-info">Début: {{.Creation}}</p>
+            <p class="card-info">Premier Album: {{.FirstAlbum}}</p>
+            <p class="card-info">Membre(s): {{len .Members}}</p>
         </div>
         {{end}}
     </main>
