@@ -24,34 +24,15 @@
 
 
     <main>
+        {{for i, cards := .body}}
         <div class="card">
-            <img src="/assets/img/Logo-sans-fond.png" alt="Artiste" class="card-image">
-            <h3 class="card-title">Test 1</h3>
+            <img src={{cards[i].image}} alt="Artiste" class="card-image">
+            <h3 class="card-title">{{card[i].artiste.name}}</h3>
             <p class="card-info">Début: Date</p>
             <p class="card-info">Premier Album: Date</p>
             <p class="card-info">Membres: 4</p>
         </div>
-        <div class="card">
-            <img src="/assets/img/Logo-sans-fond.png" alt="Artiste" class="card-image">
-            <h3 class="card-title">Test 2</h3>
-            <p class="card-info">Début: 1965</p>
-            <p class="card-info">Premier Album: Date</p>
-            <p class="card-info">Membres: 4</p>
-        </div>
-        <div class="card">
-            <img src="/assets/img/Logo-sans-fond.png" alt="Artiste" class="card-image">
-            <h3 class="card-title">Test 3</h3>
-            <p class="card-info">Début: 1968</p>
-            <p class="card-info">Premier Album: Date</p>
-            <p class="card-info">Membres: 4</p>
-        </div>
-        <div class="card">
-            <img src="/assets/img/Logo-sans-fond.png" alt="Artiste" class="card-image">
-            <h3 class="card-title">Test 4</h3>
-            <p class="card-info">Début: 1960</p>
-            <p class="card-info">Premier Album: Date</p>
-            <p class="card-info">Membres: 4</p>
-        </div>
+        {{end}}
     </main>
 
 
