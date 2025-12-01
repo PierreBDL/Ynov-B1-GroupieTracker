@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// Lire fichiers CSS
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./Power4/assets"))))
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("../front/assets"))))
 
 	// Htaccess
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
