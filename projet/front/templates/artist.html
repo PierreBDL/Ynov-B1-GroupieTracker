@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-    <link rel="stylesheet" href="/assets/css/index.css">
+    <title>Afficher Artiste</title>
     <link rel="stylesheet" href="/assets/css/commun.css">
 </head>
 <body>
@@ -23,20 +22,15 @@
         </nav>
     </header>
 
-
     <main>
-        {{range .Artists}}
         <div class="card">
             <img src="{{.Image}}" alt="{{.Name}}" class="card-image">
             <h3 class="card-title">{{.Name}}</h3>
             <p class="card-info">Début: {{.Creation}}</p>
             <p class="card-info">Premier Album: {{.FirstAlbum}}</p>
             <p class="card-info">Membre(s): {{len .Members}}</p>
-            <a href="/artist/?id={{.Id}}"> <button class="btn-voir-plus" type="button">Voir plus</button> </a>
         </div>
-        {{end}}
     </main>
-
 
     <footer>
         <div>
