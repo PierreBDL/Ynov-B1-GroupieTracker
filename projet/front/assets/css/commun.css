@@ -19,7 +19,7 @@ header nav {
     margin-right: 15vw;
     max-width: 50vw;
     border: solid 2px black;
-    background: linear-gradient(to right, #FFFFFF, #B5FFFC);
+    background: linear-gradient(to right, #62afe2, #3498DB);
     border-radius: 20px;
     display: flex;
     flex-wrap: nowrap;
@@ -45,14 +45,6 @@ header nav a img {
     border-radius: 15px;
 }
 
-#barre-recherche button, .btn-voir-plus {
-    border-radius: 10px;
-    background-color: #19CF56;
-    border: solid 1px black;
-    padding: 0.5vh 1vw;
-    cursor: pointer;
-}
-
 /* Footer */
 
 footer {
@@ -60,7 +52,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 10vh;
-    background: linear-gradient(to right, #FFFFFF, #B5FFFC);
+    background: linear-gradient(to right, #62afe2, #3498DB);
     display: flex;
     justify-content: center;
     align-items: center;

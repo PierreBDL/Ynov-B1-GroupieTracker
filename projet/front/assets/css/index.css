@@ -11,7 +11,8 @@ main {
 .card {
     border: solid 2px black;
     border-radius: 15px;
-    background: linear-gradient(to right, #FFFFFF, #B5FFFC);
+    background: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     padding: 1.5vh 1.5vw;
     display: flex;
     flex-direction: column;
@@ -45,4 +46,42 @@ main {
     font-size: 0.9rem;
     margin: 0.3vh 0;
     color: #333;
+}
+
+.btn-voir-plus {
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    padding: 1.2vh 2.5vw;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-voir-plus:hover {
+    background-color: #2980B9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+}
+
+#barre-recherche button {
+    background-color: white;
+    color: #3498DB;
+    border: none;
+    padding: 1.2vh 2.5vw;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+#barre-recherche button:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }

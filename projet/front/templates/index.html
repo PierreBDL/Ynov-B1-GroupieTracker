@@ -29,9 +29,9 @@
         <div class="card">
             <img src="{{.Image}}" alt="{{.Name}}" class="card-image">
             <h3 class="card-title">{{.Name}}</h3>
-            <p class="card-info">Début: {{.Creation}}</p>
-            <p class="card-info">Premier Album: {{.FirstAlbum}}</p>
-            <p class="card-info">Membre(s): {{len .Members}}</p>
+            <p class="card-info"><stong>Début:</stong> {{.Creation}}</p>
+            <p class="card-info"><stong>Premier Album:</stong> {{.FirstAlbum}}</p>
+            <p class="card-info"><stong>Membres:</stong> {{len .Members}}</p>
             <a href="/artist/?id={{.Id}}"> <button class="btn-voir-plus" type="button">Voir plus</button> </a>
         </div>
         {{end}}

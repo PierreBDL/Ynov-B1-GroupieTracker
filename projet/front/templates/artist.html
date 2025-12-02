@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afficher Artiste</title>
     <link rel="stylesheet" href="/assets/css/commun.css">
+    <link rel="stylesheet" href="/assets/css/artists.css">
 </head>
 <body>
     <header>
@@ -23,13 +24,29 @@
     </header>
 
     <main>
+        <form action="/return">
+            <button type="submit">Retour à la liste des artistes</button>
+        </form>
         <div class="card">
-            <img src="{{.Image}}" alt="{{.Name}}" class="card-image">
-            <h3 class="card-title">{{.Name}}</h3>
-            <p class="card-info">Début: {{.Creation}}</p>
-            <p class="card-info">Premier Album: {{.FirstAlbum}}</p>
-            <p class="card-info">Membre(s): {{len .Members}}</p>
+            <div>
+                <h3 class="card-title">{{.Name}}</h3>
+            </div>
+            <div class="card-content">
+                <img src="{{.Image}}" alt="{{.Name}}" class="card-image">
+                <div>
+                    <p class="card-info"><strong>Début:</strong> {{.Creation}}</p>
+                    <p class="card-info"><strong>Premier Album:</strong> {{.FirstAlbum}}</p>
+                    <p class="card-info"><strong>Membre(s): </strong>
+                        <ul>
+                            {{range .Members}}
+                                <li>{{.}}</li>
+                            {{end}}
+                        </ul>
+                    </p>
+                </div>
+            </div>
         </div>
+        <div></div>
     </main>
 
     <footer>
