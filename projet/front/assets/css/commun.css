@@ -41,8 +41,27 @@ header nav a img {
     padding: 1vh 0;
 }
 
-#barre-recherche input[type="search"] {
+#barre-recherche input {
     border-radius: 15px;
+}
+
+#barre-recherche button {
+    background-color: white;
+    color: #3498DB;
+    border: none;
+    padding: 1.2vh 2.5vw;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+#barre-recherche button:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }
 
 /* Footer */
