@@ -30,20 +30,20 @@ func main() {
 		"relation": "https://groupietrackers.herokuapp.com/api/relation",
 	}
 
-	// Appel de toutes les APIs
+	// Appel de toutes les APIs et récup des données
 	for nom, url := range urlsAPIs {
 		fmt.Println("Appel de l'API :", nom)
 		resp, err := http.Get(url)
 		if err != nil {
 			fmt.Println("Erreur lors de la requête HTTP pour : ", err, "\n")
-			continue
+			return
 		}
 
 		body, err := ioutil.ReadAll(resp.Body)
 		resp.Body.Close()
 		if err != nil {
 			fmt.Println("Erreur lors de la lecture de la réponse: ", err, "\n")
-			continue
+			return
 		}
 
 		//fmt.Println(string(body))
@@ -55,7 +55,7 @@ func main() {
 	// Parser les artistes
 	artists := ParseArtistes(apis["artistes"])
 
-	// Lire fichiers CSS
+	// Lire fichiers CSS et Images
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("../front/assets"))))
 
 	// Htaccess
@@ -67,7 +67,7 @@ func main() {
 		afficherAccueil(w, donnees{Artists: artists})
 	})
 
-	// Route pour la page d'un artiste
+	// Route pour la page d'un artiste si "voir plus"
 	http.HandleFunc("/artist/", func(w http.ResponseWriter, r *http.Request) {
 		// Récupération des paramètres de l'URL avec net/url
 		parametres := r.URL.Query()
@@ -84,6 +84,11 @@ func main() {
 
 		// Afficher page de l'artiste
 		afficherArtiste(w, donnees{Artists: artists}, id_int)
+	})
+
+	// Retour à l'accueil depuis la page artiste
+	http.HandleFunc("/return", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})
 
 	// Lancement serveur
