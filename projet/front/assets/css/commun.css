@@ -4,64 +4,106 @@ html, body {
     font-family: Arial, sans-serif;
     background-color: #F0F8FF;
     box-sizing: border-box;
+    background-color: #1a0f1f;
 }
 
 /* Header */
 
 header {
-    position: relative;
-    top: 1vh;
-    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 2vh 0;
+    background-color: #1a0f1f ;
+    backdrop-filter: blur(10px);
 }
 
 header nav {
-    margin-left: 15vw;
-    margin-right: 15vw;
-    max-width: 50vw;
-    border: solid 2px black;
-    background: linear-gradient(to right, #62afe2, #3498DB);
-    border-radius: 20px;
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 1vh 10vw 1vh 10vw;
+    margin: 0 auto;
+    max-width: 75vw;
+    width: 90%;
+    border: solid 2px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #ff2aad 0%, #d91c8f 100%);
+    border-radius: 25px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 1.5vh 3vw;
+    gap: 2vw;
+    box-shadow: 0 8px 32px rgba(255, 42, 173, 0.3);
+    transition: all 0.3s ease;
 }
 
-header nav a img {
-    max-height: 15vh;
+header nav:hover {
+    box-shadow: 0 12px 48px rgba(255, 42, 173, 0.4);
+    transform: translateY(-2px);
+}
+
+header .nav-left {
+    display: flex;
+    align-items: center;
+}
+
+header .nav-left img {
+    height: 10vh;
+    max-height: 80px;
     width: auto;
-    display: block;
-    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+header .nav-left img:hover {
+    transform: scale(1.1) rotate(5deg);
 }
 
 #barre-recherche {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1vw;
-    padding: 1vh 0;
+    gap: 1.5vw;
+    padding: 0;
+}
+
+#barre-recherche label {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #barre-recherche input {
-    border-radius: 15px;
+    max-width: 25vw;
+    padding: 1.2vh 2vw;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 #barre-recherche button {
     background-color: white;
-    color: #3498DB;
+    color: #ff2aad;
     border: none;
     padding: 1.2vh 2.5vw;
-    border-radius: 25px;
+    border-radius: 20px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 #barre-recherche button:hover {
-    background-color: white;
+    background-color: #1a0f1f;
+    color: white;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+#barre-recherche button:active {
+    transform: translateY(0);
 }
 
 /* Footer */
@@ -71,7 +113,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 10vh;
-    background: linear-gradient(to right, #62afe2, #3498DB);
+    background-color: #ff2aad;
     display: flex;
     justify-content: center;
     align-items: center;

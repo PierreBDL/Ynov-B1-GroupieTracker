@@ -11,27 +11,28 @@
 <body>
     <header>
         <nav>
-            <div>
+            <div class="nav-left">
                 <a href="#"> <img src="/assets/img/Logo-sans-fond.png" alt="logo introuvable"> </a>
             </div>
-            <div>
+            <div class="nav-center">
                 <form action="/recherche" method="get" id="barre-recherche">
-                    <label for="research">Chercher un groupe</label>
+                    <label for="research">Recherche</label>
                     <input type="search" id="research" name="recherche" />
-                    <button type="button" id="research-btn">Recherche</button>
+                    <button type="button" id="research-btn">Valider</button>
                 </form>
             </div>
+            <div class="nav-right"></div>
         </nav>
     </header>
 
     <main>
         {{range .Artists}}
         <div class="card">
-            <img src="{{.Image}}" alt="{{.Name}}" class="card-image">
-            <h3 class="card-title">{{.Name}}</h3>
-            <p class="card-info"><stong>Début:</stong> {{.Creation}}</p>
-            <p class="card-info"><stong>Premier Album:</stong> {{.FirstAlbum}}</p>
-            <p class="card-info"><stong>Membres:</stong> {{len .Members}}</p>
+            <img src="{{.Image}}" alt="{{.Name}}" class="image">
+            <h3 class="title">{{.Name}}</h3>
+            <p class="infos"><stong>Début:</stong> {{.Creation}}</p>
+            <p class="infos"><stong>Premier Album:</stong> {{.FirstAlbum}}</p>
+            <p class="infos"><stong>Membres:</stong> {{len .Members}}</p>
             <a href="/artist/?id={{.Id}}"> <button class="btn-voir-plus" type="button">Voir plus</button> </a>
         </div>
         {{end}}

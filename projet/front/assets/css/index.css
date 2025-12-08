@@ -2,16 +2,16 @@
 main {
     min-height: 80vh;
     margin: 5vh 5vw;
-    padding-bottom: 15vh;
+    padding: 15vh 5vw 15vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2vw;
 }
 
 .card {
-    border: solid 2px black;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    background: #FFFFFF;
+    background-color: #1f1f1f;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     padding: 1.5vh 1.5vw;
     display: flex;
@@ -24,10 +24,10 @@ main {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(B3, B3, B3, 0.2);
 }
 
-.card-image {
+.image {
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -36,20 +36,22 @@ main {
     margin-bottom: 1vh;
 }
 
-.card-title {
+.title {
     font-size: 1.2rem;
     margin: 1vh 0;
     font-weight: bold;
+    color: white;
 }
 
-.card-info {
+.infos {
     font-size: 0.9rem;
     margin: 0.3vh 0;
-    color: #333;
+    color: white;
 }
 
 .btn-voir-plus {
-    background-color: #3498DB;
+    background-color: #ff2aad;
+    box-shadow: 0 0 10px rgba(255,42,173,0.4);
     color: white;
     border: none;
     padding: 1.2vh 2.5vw;
@@ -62,7 +64,7 @@ main {
 }
 
 .btn-voir-plus:hover {
-    background-color: #2980B9;
+    background-color: #9c1267;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }

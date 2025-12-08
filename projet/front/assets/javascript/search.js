@@ -1,6 +1,6 @@
 // Récup des éléments du DOM
 const searchInput = document.getElementById('research');
-const titles = document.querySelectorAll('.card-title');
+const titles = document.querySelectorAll('.title');
 
 // Fonction de recherche
 function research() {
@@ -16,8 +16,8 @@ function research() {
     
     // Parcourir tous les titres
     for (let i = 0; i < titles.length; i++) {
-        // Transforme le texte en minuscules et recherche si le titre contient le texte recherché
-        if (!titles[i].innerText.toLowerCase().includes(search.toLowerCase())) {
+        // Transformer le texte en minuscules et recherche si le titre contient le texte cherché
+        if (titles[i].innerText.toLowerCase().includes(search.toLowerCase()) == false) {
             titles[i].parentElement.style.display = "none"; // Cache la carte si pas de correspondance
         } else {
             titles[i].parentElement.style.display = "flex"; // Affiche la carte si correspondance
