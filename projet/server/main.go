@@ -19,6 +19,12 @@ var apis = map[string][]byte{
 // Données envoyées au html
 type donnees struct {
 	Artists []artistes
+	Lieux   []lieux
+}
+
+type donnesprecises struct {
+	Artiste artistes
+	Lieux   lieux
 }
 
 func main() {
@@ -46,7 +52,7 @@ func main() {
 			return
 		}
 
-		//fmt.Println(string(body))
+		fmt.Println(string(body))
 
 		// Ajout des données dans le tableau
 		apis[nom] = body
@@ -54,6 +60,9 @@ func main() {
 
 	// Parser les artistes
 	artists := ParseArtistes(apis["artistes"])
+
+	// Parser les lieux
+	lieux := ParseLieux(apis["lieux"])
 
 	// Lire fichiers CSS et Images
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("../front/assets"))))
@@ -64,7 +73,7 @@ func main() {
 			http.NotFound(w, r)
 			return
 		}
-		afficherAccueil(w, donnees{Artists: artists})
+		afficherAccueil(w, donnees{Artists: artists, Lieux: lieux})
 	})
 
 	// Route pour la page d'un artiste si "voir plus"
@@ -78,12 +87,11 @@ func main() {
 		// Conversion en int
 		id_int, err := strconv.Atoi(id)
 		if err != nil {
-			// ... handle error
 			panic(err)
 		}
 
 		// Afficher page de l'artiste
-		afficherArtiste(w, donnees{Artists: artists}, id_int)
+		afficherArtiste(w, donnees{Artists: artists, Lieux: lieux}, id_int)
 	})
 
 	// Retour à l'accueil depuis la page artiste
@@ -104,15 +112,24 @@ func afficherAccueil(w http.ResponseWriter, data donnees) {
 // Afficher page de l'artiste
 func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
 	donneesArtiste := artistes{}
+	donneesLieux := lieux{}
+
 	// On cherche l'artiste avec l'id
 	for index, artist := range data.Artists {
 		if artist.Id == id {
 			donneesArtiste = data.Artists[index]
+			donneesLieux = data.Lieux[index]
 			break
 		}
 	}
 
+	// Fusionner les données artistes et lieux
+	dataPrecises := donnesprecises{
+		Artiste: donneesArtiste,
+		Lieux:   donneesLieux,
+	}
+
 	// Affichage de la page de l'artiste
 	tmpl := template.Must(template.ParseFiles("../front/templates/artist.html"))
-	tmpl.Execute(w, donneesArtiste)
+	tmpl.Execute(w, dataPrecises)
 }

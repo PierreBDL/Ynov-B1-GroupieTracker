@@ -27,3 +27,27 @@ func ParseArtistes(data_to_parse []byte) []artistes {
 	// On retourne la liste des artistes
 	return artists
 }
+
+// Structure des données des lieux
+type lieux struct {
+	Id        int      `json:"id"`
+	Locations []string `json:"locations"`
+	Dates     string   `json:"dates"`
+}
+
+// Structure qui contient la structure des lieux
+type localisation struct {
+	Index []lieux `json:"index"`
+}
+
+// Parser les lieux
+func ParseLieux(data_to_parse []byte) []lieux {
+	var lieux_localisation localisation
+	err := json.Unmarshal(data_to_parse, &lieux_localisation)
+	if err != nil {
+		fmt.Println("error:", err)
+		return nil
+	}
+	// On retourne la liste des lieux avec leur index
+	return lieux_localisation.Index
+}

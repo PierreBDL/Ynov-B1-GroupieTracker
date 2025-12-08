@@ -10,25 +10,36 @@
 </head>
 <body>
     <main>
-        <form action="/return">
-            <button type="submit">Retour à la liste des artistes</button>
-        </form>
         <div class="card">
-            <div>
-                <h3 class="title">{{.Name}}</h3>
+            <div class="card-header">
+                <div id="header-content">
+                    <div></div>
+                    <h3 class="title">{{.Artiste.Name}}</h3>
+                    <form action="/return">
+                        <button type="submit">Retour à la liste des artistes</button>
+                    </form>
+                </div>
+                <hr>
             </div>
             <div class="content">
-                <img src="{{.Image}}" alt="{{.Name}}" class="image">
-                <div>
-                    <p class="infos"><strong>Début:</strong> {{.Creation}}</p>
-                    <p class="infos"><strong>Premier Album:</strong> {{.FirstAlbum}}</p>
-                    <p class="infos"><strong>Membre(s): </strong>
-                        <ul>
-                            {{range .Members}}
-                                <li class="members_names">{{.}}</li>
-                            {{end}}
-                        </ul>
-                    </p>
+                <img src="{{.Artiste.Image}}" alt="{{.Artiste.Name}}" class="image">
+                <div class="details">
+                    <p class="info"><strong>Début:</strong> {{.Artiste.Creation}}</p>
+                    <p class="info"><strong>Premier Album:</strong> {{.Artiste.FirstAlbum}}</p>
+                    
+                    <p class="info"><strong>Membre(s):</strong></p>
+                    <ul class="members-names">
+                        {{range .Artiste.Members}}
+                            <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                    
+                    <p class="info"><strong>Lieux de concert:</strong></p>
+                    <ul class="locations-list">
+                        {{range .Lieux.Locations}}
+                            <li>{{.}}</li>
+                        {{end}}
+                    </ul>
                 </div>
             </div>
         </div>
