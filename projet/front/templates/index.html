@@ -26,6 +26,8 @@
     </header>
 
     <main>
+        <!-- --------------------------------------------------------- -->
+
         <div id="filters_div">
             <div id="filters">
                 <h3>Filtres</h3>
@@ -33,18 +35,18 @@
                 <div class="filter">
                     <fieldset>
                         <legend>Années de début</legend>
-                        <input type="checkbox" value="60" id="60">
+                        <input type="radio" name="annee" value="1960" id="60">
                         <label for="60">Années 60</label><br>
-                        <input type="checkbox" value="70" id="70">
+                        <input type="radio" name="annee" value="1970" id="70">
                         <label for="70">Années 70</label><br>
-                        <input type="checkbox" value="80" id="80">
+                        <input type="radio" name="annee" value="1980" id="80">
                         <label for="80">Années 80</label><br>
-                        <input type="checkbox" value="90" id="90">
+                        <input type="radio" name="annee" value="1990" id="90">
                         <label for="90">Années 90</label><br>
-                        <input type="checkbox" value="2000" id="2000">
+                        <input type="radio" name="annee" value="2000" id="2000">
                         <label for="2000">Années 2000</label><br>
-                        <input type="checkbox" value="2010" id="2010">
-                        <label for="">Années 2010</label><br>
+                        <input type="radio" name="annee" value="2010" id="2010">
+                        <label for="2010">Années 2010</label><br>
                     </fieldset>
                 </div>
                 <br /> <br />
@@ -68,18 +70,23 @@
             <button type="button" id="btn_filters">></button>
         </div>
 
+
+        <!-- --------------------------------------------------------- -->
+
         <div id="cards">
             {{range .Artists}}
             <div class="card">
                 <img src="{{.Image}}" alt="{{.Name}}" class="image">
                 <h3 class="title">{{.Name}}</h3>
-                <p class="infos"><stong>Début:</stong> {{.Creation}}</p>
+                <p class="infos"><stong>Début:</stong> <span class="annee_debut">{{.Creation}}</span></p>
                 <p class="infos"><stong>Premier Album:</stong> {{.FirstAlbum}}</p>
                 <p class="infos"><stong>Membres:</stong> {{len .Members}}</p>
                 <a href="/artist/?id={{.Id}}"> <button class="btn-voir-plus" type="button">Voir plus</button> </a>
             </div>
             {{end}}
         </div>
+
+        <!-- --------------------------------------------------------- -->
     </main>
 
 

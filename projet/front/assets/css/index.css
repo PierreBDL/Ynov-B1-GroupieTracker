@@ -107,7 +107,7 @@ main {
     padding: 0;
 }
 
-.filter input[type="checkbox"] {
+.filter input[type="radio"] {
     width: 18px;
     height: 18px;
     margin-right: 10px;
@@ -115,14 +115,14 @@ main {
     accent-color: #ff2aad;
 }
 
-.filter input[type="checkbox"] + label {
+.filter input[type="radio"] + label {
     cursor: pointer;
     color: #1a0f1f;
     font-size: 0.95rem;
-    transition: color 0.2s;
+    transition: color 0.3s;
 }
 
-.filter input[type="checkbox"]:checked + label {
+.filter input[type="radio"]:checked + label {
     color: #ff2aad;
     font-weight: 600;
 }

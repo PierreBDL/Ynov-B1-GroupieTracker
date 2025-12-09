@@ -55,3 +55,37 @@ number_album.addEventListener('input', () => {
     filter_album.value = number_album.value;
     value_album.textContent = filter_album.value;
 });
+
+
+// Application des filtres
+
+// Années
+const annee_debut = document.querySelectorAll('.annee_debut');
+const annee_selectionnee_radios = document.querySelectorAll('input[name="annee"]');
+
+// Vérif de tous les btn radio
+annee_selectionnee_radios.forEach(annee_selectionnee_radio => {
+
+    // Clique sur un filtre année
+    annee_selectionnee_radio.addEventListener('change', () => {
+
+        // Récup de l'année sélectionnée
+        const annee_selectionnee = parseInt(document.querySelector('input[name="annee"]:checked').value);
+        
+        // On vérif tous les groupes
+        annee_debut.forEach(groupe => {
+            
+            // Conversion en int
+            const annee_groupe = parseInt(groupe.innerText);
+
+            // Vérif si l'année est dans la décennie
+            if (annee_groupe >= annee_selectionnee && annee_groupe < annee_selectionnee + 10) {
+                // Afficher card
+                groupe.parentElement.parentElement.style.display = "flex";
+            } else {
+                // Cacher card
+                groupe.parentElement.parentElement.style.display = "none";
+            }
+        });
+    });
+});
