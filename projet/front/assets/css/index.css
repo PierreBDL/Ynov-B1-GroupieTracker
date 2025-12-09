@@ -1,5 +1,218 @@
 /* Main */
 main {
+    display: block;
+    min-height: 100vh;
+}
+
+/* Filtres config btn && style */
+
+#filters_div {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+#filters_div button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    width: 6vw;
+    background-color: #F5DCE0;
+    border: none;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: all 0.3s;
+}
+
+#filters_div button:hover {
+    background-color: #f7cbd2;
+    transform: translateX(5px);
+}
+
+#filters {
+    display: none;
+    background-color: #F5DCE0;
+    padding: 3vh 2vw;
+    height: 70vh;
+    width: 22vw;
+    border-radius: 0 20px 20px 0;
+    overflow-y: auto;
+    transition: all 0.3s;
+}
+
+#filters.filters_active {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+/* Scrollbar filtres */
+#filters::-webkit-scrollbar {
+    width: 8px;
+}
+
+#filters::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+#filters::-webkit-scrollbar-thumb {
+    background-color: #d91c8f;
+    border-radius: 10px;
+}
+
+#filters h3 {
+    font-size: 3vh;
+    margin: 0 0 2vh 0;
+    color: #1a0f1f;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #ff2aad;
+    padding-bottom: 1vh;
+}
+
+.filter {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 2vh 1.5vw;
+    border-radius: 15px;
+    border: 2px solid rgba(26, 15, 31, 0.1);
+    transition: all 0.3s;
+}
+
+.filter:hover {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 42, 173, 0.3);
+}
+
+.filter fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter legend {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a0f1f;
+    margin-bottom: 1.5vh;
+    padding: 0;
+}
+
+.filter input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #ff2aad;
+}
+
+.filter input[type="checkbox"] + label {
+    cursor: pointer;
+    color: #1a0f1f;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.filter input[type="checkbox"]:checked + label {
+    color: #ff2aad;
+    font-weight: 600;
+}
+
+.filter label {
+    display: block;
+    font-weight: 600;
+    color: #1a0f1f;
+    margin-bottom: 1vh;
+    font-size: 1rem;
+}
+
+.filter label span {
+    color: #ff2aad;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.filter input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 10px;
+    background-color: #d91c8f;
+    -webkit-appearance: none;
+    margin: 1vh 0;
+}
+
+.filter input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    border: 3px solid #ff2aad;
+    transition: all 0.2s;
+}
+
+.filter input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0 4px 12px rgba(255, 42, 173, 0.7);
+}
+
+.filter input[type="range"]::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    border: 3px solid #ff2aad;
+}
+
+.filter input[type="number"] {
+    width: 90%;
+    padding: 1vh 1vw 1vh 1vw;
+    border: 2px solid rgba(26, 15, 31, 0.2);
+    border-radius: 10px;
+    background-color: white;
+    color: #1a0f1f;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1vh;
+    transition: all 0.3s;
+}
+
+.filter input[type="number"]:focus {
+    outline: none;
+    border-color: #ff2aad;
+}
+
+.filter input[type="text"] {
+    width: 100%;
+    padding: 1.2vh 1vw;
+    border: 2px solid rgba(26, 15, 31, 0.2);
+    border-radius: 10px;
+    background: white;
+    color: #1a0f1f;
+    font-size: 1rem;
+    margin-top: 1vh;
+    transition: all 0.3s;
+}
+
+.filter input[type="text"]:focus {
+    outline: none;
+    border-color: #ff2aad;
+}
+
+/* Cards */
+
+#cards{
     min-height: 80vh;
     margin: 5vh 5vw;
     padding: 15vh 5vw 15vh;
@@ -64,7 +277,8 @@ main {
 }
 
 .btn-voir-plus:hover {
-    background-color: #f7cbd2;
+    background-color: #1a0f1f;
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }
