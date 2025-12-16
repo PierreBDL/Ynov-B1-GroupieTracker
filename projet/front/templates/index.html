@@ -80,7 +80,7 @@
                 <h3 class="title">{{.Name}}</h3>
                 <p class="infos"><stong>Début:</stong> <span class="annee_debut">{{.Creation}}</span></p>
                 <p class="infos"><stong>Premier Album:</stong> {{.FirstAlbum}}</p>
-                <p class="infos"><stong>Membres:</stong> {{len .Members}}</p>
+                <p class="infos"><stong>Membres:</stong> <span class="nb_member">{{len .Members}}</span> </p>
                 <ul class="invisible">
                     {{range .Members}}
                     <li class="member">{{.}}</li>

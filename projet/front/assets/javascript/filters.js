@@ -89,3 +89,20 @@ annee_selectionnee_radios.forEach(annee_selectionnee_radio => {
         });
     });
 });
+
+// Nombre de membres
+const nb_membres_cards = document.querySelectorAll(".nb_member");
+const nb_members_filtre = document.getElementById("filter_membres");
+
+nb_members_filtre.addEventListener("input", () => {
+    // Vérif sur chaque carte
+    nb_membres_cards.forEach(nb_membres => {
+        if (parseInt(nb_members_filtre.value) === parseInt(nb_membres.textContent)) {
+            nb_membres.parentElement.parentElement.style.display = "flex";
+        } else {
+            nb_membres.parentElement.parentElement.style.display = "none";
+        }
+    });
+});
+
+
