@@ -81,6 +81,11 @@
                 <p class="infos"><stong>Début:</stong> <span class="annee_debut">{{.Creation}}</span></p>
                 <p class="infos"><stong>Premier Album:</stong> {{.FirstAlbum}}</p>
                 <p class="infos"><stong>Membres:</stong> {{len .Members}}</p>
+                <ul class="invisible">
+                    {{range .Members}}
+                    <li class="member">{{.}}</li>
+                    {{end}}
+                </ul>
                 <a href="/artist/?id={{.Id}}"> <button class="btn-voir-plus" type="button">Voir plus</button> </a>
             </div>
             {{end}}

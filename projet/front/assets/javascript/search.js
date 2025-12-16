@@ -1,6 +1,6 @@
 // Récup des éléments du DOM
 const searchInput = document.getElementById('research');
-const titles = document.querySelectorAll('.title');
+const cards = document.querySelectorAll('.card');
 
 // Fonction de recherche
 function research() {
@@ -8,21 +8,38 @@ function research() {
     
     if (search === '') {
         // Si vide, afficher toutes les cartes
-        titles.forEach(title => {
-            title.parentElement.style.display = "flex";
+        cards.forEach(card => {
+            card.style.display = "flex";
         });
         return;
     }
-    
-    // Parcourir tous les titres
-    for (let i = 0; i < titles.length; i++) {
-        // Transformer le texte en minuscules et recherche si le titre contient le texte cherché
-        if (titles[i].innerText.toLowerCase().includes(search.toLowerCase()) == false) {
-            titles[i].parentElement.style.display = "none"; // Cache la carte si pas de correspondance
-        } else {
-            titles[i].parentElement.style.display = "flex"; // Affiche la carte si correspondance
+
+    cards.forEach(card => {
+        const title = card.querySelector(".title");
+        const members = card.querySelectorAll('.member');
+
+        let isResearch = false;
+
+
+        // Regarder si le titre est recherché
+        if (title.innerText.toLowerCase().includes(search.toLowerCase())) {
+            isResearch = true;
         }
-    }
+
+        // Parcourir tous les membres pour voir si le texte cherché correspond à un membre
+        members.forEach (member => {
+            if (member.innerText.toLowerCase().includes(search.toLowerCase())) {
+                isResearch = true;
+            }
+        });
+
+        // Si recherché => affiche sinon non
+        if (isResearch == true) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });    
 }
 
 // Recherche temps réel

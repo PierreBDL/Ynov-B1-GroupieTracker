@@ -262,6 +262,11 @@ main {
     color: white;
 }
 
+.invisible {
+    display: none;
+    visibility: hidden;
+}
+
 .btn-voir-plus {
     background-color: #F5DCE0;
     box-shadow: 0 0 10px rgba(255,42,173,0.4);
