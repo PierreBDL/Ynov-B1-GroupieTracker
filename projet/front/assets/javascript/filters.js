@@ -41,21 +41,6 @@ number_membres.addEventListener('input', () => {
     value_membres.textContent = filter_membres.value;
 });
 
-// Albums
-const filter_album = document.getElementById('filter_album');
-const value_album = document.getElementById('value_album');
-const number_album = document.getElementById('number_album');
-
-filter_album.addEventListener('input', () => {
-    value_album.textContent = filter_album.value;
-    number_album.value = filter_album.value;
-});
-
-number_album.addEventListener('input', () => {
-    filter_album.value = number_album.value;
-    value_album.textContent = filter_album.value;
-});
-
 
 // Application des filtres
 
@@ -106,3 +91,17 @@ nb_members_filtre.addEventListener("input", () => {
 });
 
 
+// Date premier album
+const premier_album_cards = document.querySelectorAll(".premier_album")
+const premier_album_filtre = document.getElementById("filter_album")
+
+premier_album_filtre.addEventListener("input", () => {
+    // Vérif sur chaque carte
+    premier_album_cards.forEach(premier_album_card => {
+        if (premier_album_card.innerHTML.toLocaleLowerCase().includes(premier_album_filtre.value.toLocaleLowerCase())) {
+            premier_album_card.parentElement.parentElement.style.display = "flex";
+        } else {
+            premier_album_card.parentElement.parentElement.style.display = "none";
+        }
+    });
+});

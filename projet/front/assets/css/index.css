@@ -194,7 +194,7 @@ main {
 }
 
 .filter input[type="text"] {
-    width: 100%;
+    width: 90%;
     padding: 1.2vh 1vw;
     border: 2px solid rgba(26, 15, 31, 0.2);
     border-radius: 10px;

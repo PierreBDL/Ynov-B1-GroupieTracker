@@ -57,9 +57,8 @@
                 </div>
                 <br /> <br />
                 <div class="filter">
-                    <label for="filter_album">Nombre d'albums <span id="value_album">0</span></label>
-                    <input type="range" id="filter_album" name="filter_album" min="0" max="20" value="1"/>
-                    <input type="number" id="number_album" name="number_album" min="0" max="20" value="1"/>
+                    <label for="filter_album">Date du premier album</label>
+                    <input type="text" id="filter_album" name="filter_album" placeholder="19-06-2001 ou 2001"/>
                 </div>
                 <br /> <br />
                 <div class="filter">
@@ -79,7 +78,7 @@
                 <img src="{{.Image}}" alt="{{.Name}}" class="image">
                 <h3 class="title">{{.Name}}</h3>
                 <p class="infos"><stong>Début:</stong> <span class="annee_debut">{{.Creation}}</span></p>
-                <p class="infos"><stong>Premier Album:</stong> {{.FirstAlbum}}</p>
+                <p class="infos"><stong>Premier Album:</stong> <span class="premier_album">{{.FirstAlbum}}</span> </p>
                 <p class="infos"><stong>Membres:</stong> <span class="nb_member">{{len .Members}}</span> </p>
                 <ul class="invisible">
                     {{range .Members}}
