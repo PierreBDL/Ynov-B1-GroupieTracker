@@ -1,7 +1,7 @@
 const btnFilters = document.getElementById('btn_filters'); 
 const filtersDiv = document.getElementById('filters');
 
-// Reset du style au démarrage
+// Cache les filtres au chargement
 filtersDiv.style.display = 'none';
 
 // Evénement
@@ -24,6 +24,10 @@ btnFilters.addEventListener('click', () => {
 });
 
 
+
+
+
+
 // MAJ du texte avec la valeur des barres
 
 // Membres
@@ -42,66 +46,107 @@ number_membres.addEventListener('input', () => {
 });
 
 
+
+
+
+
 // Application des filtres
 
-// Années
-const annee_debut = document.querySelectorAll('.annee_debut');
-const annee_selectionnee_radios = document.querySelectorAll('input[name="annee"]');
 
-// Vérif de tous les btn radio
-annee_selectionnee_radios.forEach(annee_selectionnee_radio => {
+// Reset des filtres
+const btn_reset_filters = document.getElementById('btn_reset_filters');
 
-    // Clique sur un filtre année
-    annee_selectionnee_radio.addEventListener('change', () => {
+btn_reset_filters.addEventListener('click', () => {
+    // Membres
+    filter_membres.value = filter_membres.min;
+    value_membres.textContent = filter_membres.min;
+    number_membres.value = filter_membres.min;
 
-        // Récup de l'année sélectionnée
-        const annee_selectionnee = parseInt(document.querySelector('input[name="annee"]:checked').value);
-        
-        // On vérif tous les groupes
-        annee_debut.forEach(groupe => {
+    // Années
+    const annee_selectionnee_radios = document.querySelectorAll('input[name="annee"]');
+
+    annee_selectionnee_radios.forEach(radio => 
+        radio.checked = false
+    );
+
+    // Date premier album
+    const premier_album_filtre = document.getElementById("filter_album");
+    premier_album_filtre.value = "";
+});
+
+
+
+
+// Vérif si on clique sur le bouton appliquer
+const btn_apply_filters = document.getElementById('btn_apply_filters');
+
+// Récup de toutes les cartes
+const groupes = document.querySelectorAll('.card');
+
+btn_apply_filters.addEventListener('click', () => {
+
+    // Vérif de chaque carte
+    groupes.forEach(groupe => {
+        // Affichage de base
+        let annee = true;
+        let membres = true;
+        let album = true;
+
+        // Années
+        const annee_debut = parseInt(groupe.querySelector('.annee_debut').textContent);
+        const annee_selectionnee_radio = document.querySelector('input[name="annee"]:checked');
+        let annee_selectionnee = undefined;
+
+        if (annee_selectionnee_radio != null) {
+            // Récup de l'année sélectionnée + conversion en int
+            annee_selectionnee = parseInt(annee_selectionnee_radio.value);
             
-            // Conversion en int
-            const annee_groupe = parseInt(groupe.innerText);
-
             // Vérif si l'année est dans la décennie
-            if (annee_groupe >= annee_selectionnee && annee_groupe < annee_selectionnee + 10) {
-                // Afficher card
-                groupe.parentElement.parentElement.style.display = "flex";
+            if (annee_debut >= annee_selectionnee && annee_debut < annee_selectionnee + 10) {
+                // Garde bool à true
+                annee = true;
             } else {
-                // Cacher card
-                groupe.parentElement.parentElement.style.display = "none";
+                // Passe le bool à false
+                annee = false;
             }
-        });
-    });
-});
-
-// Nombre de membres
-const nb_membres_cards = document.querySelectorAll(".nb_member");
-const nb_members_filtre = document.getElementById("filter_membres");
-
-nb_members_filtre.addEventListener("input", () => {
-    // Vérif sur chaque carte
-    nb_membres_cards.forEach(nb_membres => {
-        if (parseInt(nb_members_filtre.value) === parseInt(nb_membres.textContent)) {
-            nb_membres.parentElement.parentElement.style.display = "flex";
-        } else {
-            nb_membres.parentElement.parentElement.style.display = "none";
         }
-    });
-});
+
+        // Nombre de membres
+        const nb_membres_card = groupe.querySelector(".nb_member");
+        const nb_members_filtre = document.getElementById("filter_membres");
+
+        if (nb_members_filtre.value != nb_members_filtre.min) {
+            if (parseInt(nb_members_filtre.value) === parseInt(nb_membres_card.textContent)) {
+                // Garde la carte
+                membres = true;
+            } else {
+                // Passe le bool à false
+                membres = false;
+            }
+        };
 
 
-// Date premier album
-const premier_album_cards = document.querySelectorAll(".premier_album")
-const premier_album_filtre = document.getElementById("filter_album")
+        // Date premier album
+        const premier_album_card = groupe.querySelector(".premier_album")
+        const premier_album_filtre = document.getElementById("filter_album")
 
-premier_album_filtre.addEventListener("input", () => {
-    // Vérif sur chaque carte
-    premier_album_cards.forEach(premier_album_card => {
-        if (premier_album_card.innerHTML.toLocaleLowerCase().includes(premier_album_filtre.value.toLocaleLowerCase())) {
-            premier_album_card.parentElement.parentElement.style.display = "flex";
+        if (premier_album_filtre.value != "") {
+            if (premier_album_card.innerHTML.toLocaleLowerCase().includes(premier_album_filtre.value.toLocaleLowerCase())) {
+                // Garde la carte
+                album = true;
+            } else {
+                // Passe le bool à false
+                album = false;
+            }
+        }
+
+        // Garde la carte si tous les bool sont toujours à true
+        if (annee == true && membres == true && album == true) {
+            // Affiche la carte
+            groupe.style.display = "flex";
         } else {
-            premier_album_card.parentElement.parentElement.style.display = "none";
+            // Cache la carte
+            groupe.style.display = "none";
         }
     });
 });

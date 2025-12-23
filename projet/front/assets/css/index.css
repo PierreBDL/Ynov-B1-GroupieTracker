@@ -17,7 +17,7 @@ main {
     flex-direction: row;
 }
 
-#filters_div button {
+#filters_div #btn_filters {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +73,7 @@ main {
     margin: 0 0 2vh 0;
     color: #1a0f1f;
     text-align: center;
-    font-weight: 800;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 2px;
     border-bottom: 3px solid #ff2aad;
@@ -208,6 +208,31 @@ main {
 .filter input[type="text"]:focus {
     outline: none;
     border-color: #ff2aad;
+}
+
+.filter_btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 1vw;
+    margin-top: 2vh;
+}
+
+.filter_btn button, .filter_btn button {
+    background-color: rgba(255, 42, 173, 0.3);
+    color: #1a0f1f;
+    border: none;
+    padding: 1.2vh 2.5vw 1.2vh 2.5vw;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter_btn button:hover, .filter_btn button:hover {
+    background-color: #ff2aad;
+    color: #1a0f1f;
+    transform: translateY(-2px);
 }
 
 /* Cards */

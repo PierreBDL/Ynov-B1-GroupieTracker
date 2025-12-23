@@ -26,7 +26,7 @@
     </header>
 
     <main>
-        <!-- --------------------------------------------------------- -->
+        <!--------------------------------------------------------------->
 
         <div id="filters_div">
             <div id="filters">
@@ -51,9 +51,9 @@
                 </div>
                 <br /> <br />
                 <div class="filter">
-                    <label for="filter_membres">Nombre de membres <span id="value_membres">1</span></label>
-                    <input type="range" id="filter_membres" name="filter_membres" min="1" max="10" value="1"/>
-                    <input type="number" id="number_membres" name="number_membres" min="1" max="10" value="1"/>
+                    <label for="filter_membres">Nombre de membres <span id="value_membres">0</span></label>
+                    <input type="range" id="filter_membres" name="filter_membres" min="0" max="10" value="0"/>
+                    <input type="number" id="number_membres" name="number_membres" min="0" max="10" value="0"/>
                 </div>
                 <br /> <br />
                 <div class="filter">
@@ -65,21 +65,25 @@
                     <label for="filter_place_concert">Lieu</label>
                     <input type="text" id="filter_place_concert" name="filter_place_concert" placeholder="Paris ou France"/>
                 </div>
+                <div class="filter_btn">
+                    <button type="button" id="btn_apply_filters">Appliquer les filtres</button>
+                    <button type="button" id="btn_reset_filters">Réinitialiser les filtres</button>
+                </div>
             </div>
             <button type="button" id="btn_filters">></button>
         </div>
 
 
-        <!-- --------------------------------------------------------- -->
+        <!--------------------------------------------------------------->
 
         <div id="cards">
             {{range .Artists}}
             <div class="card">
                 <img src="{{.Image}}" alt="{{.Name}}" class="image">
                 <h3 class="title">{{.Name}}</h3>
-                <p class="infos"><stong>Début:</stong> <span class="annee_debut">{{.Creation}}</span></p>
-                <p class="infos"><stong>Premier Album:</stong> <span class="premier_album">{{.FirstAlbum}}</span> </p>
-                <p class="infos"><stong>Membres:</stong> <span class="nb_member">{{len .Members}}</span> </p>
+                <p class="infos"><strong>Début:</strong> <span class="annee_debut">{{.Creation}}</span></p>
+                <p class="infos"><strong>Premier Album:</strong> <span class="premier_album">{{.FirstAlbum}}</span> </p>
+                <p class="infos"><strong>Membres:</strong> <span class="nb_member">{{len .Members}}</span> </p>
                 <ul class="invisible">
                     {{range .Members}}
                     <li class="member">{{.}}</li>
@@ -90,7 +94,7 @@
             {{end}}
         </div>
 
-        <!-- --------------------------------------------------------- -->
+        <!--------------------------------------------------------------->
     </main>
 
 
