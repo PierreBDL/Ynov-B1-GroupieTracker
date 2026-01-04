@@ -18,13 +18,15 @@ var apis = map[string][]byte{
 
 // Données envoyées au html
 type donnees struct {
-	Artists []artistes
-	Lieux   []lieux
+	Artists  []artistes
+	Lieux    []lieux
+	Relation []relation
 }
 
 type donnesprecises struct {
-	Artiste artistes
-	Lieux   lieux
+	Artiste  artistes
+	Lieux    lieux
+	Relation relation
 }
 
 func main() {
@@ -64,6 +66,9 @@ func main() {
 	// Parser les lieux
 	lieux := ParseLieux(apis["lieux"])
 
+	// Parser les relations
+	relations := ParseRelations(apis["relation"])
+
 	// Lire fichiers CSS et Images
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("../front/assets"))))
 
@@ -73,7 +78,7 @@ func main() {
 			http.NotFound(w, r)
 			return
 		}
-		afficherAccueil(w, donnees{Artists: artists, Lieux: lieux})
+		afficherAccueil(w, donnees{Artists: artists, Lieux: lieux, Relation: relations})
 	})
 
 	// Route pour la page d'un artiste si "voir plus"
@@ -91,7 +96,7 @@ func main() {
 		}
 
 		// Afficher page de l'artiste
-		afficherArtiste(w, donnees{Artists: artists, Lieux: lieux}, id_int)
+		afficherArtiste(w, donnees{Artists: artists, Lieux: lieux, Relation: relations}, id_int)
 	})
 
 	// Retour à l'accueil depuis la page artiste
@@ -113,20 +118,37 @@ func afficherAccueil(w http.ResponseWriter, data donnees) {
 func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
 	donneesArtiste := artistes{}
 	donneesLieux := lieux{}
+	donneesRelation := relation{}
 
 	// On cherche l'artiste avec l'id
-	for index, artist := range data.Artists {
+	for _, artist := range data.Artists {
 		if artist.Id == id {
-			donneesArtiste = data.Artists[index]
-			donneesLieux = data.Lieux[index]
+			donneesArtiste = artist
+			break
+		}
+	}
+
+	// On cherche les lieux avec l'id
+	for _, lieu := range data.Lieux {
+		if lieu.Id == id {
+			donneesLieux = lieu
+			break
+		}
+	}
+
+	// On cherche les relations avec l'id
+	for _, relation := range data.Relation {
+		if relation.Id == id {
+			donneesRelation = relation
 			break
 		}
 	}
 
 	// Fusionner les données artistes et lieux
 	dataPrecises := donnesprecises{
-		Artiste: donneesArtiste,
-		Lieux:   donneesLieux,
+		Artiste:  donneesArtiste,
+		Lieux:    donneesLieux,
+		Relation: donneesRelation,
 	}
 
 	// Affichage de la page de l'artiste

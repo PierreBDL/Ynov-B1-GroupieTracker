@@ -110,8 +110,39 @@ main form button:hover {
     box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }
 
+/* Liste concerts */
+
 .locations-list {
     padding: 0.5vh 1vw;
-    margin: 0.5vh 0 0;
     border-radius: 8px;
+    max-height: 20vh;
+    overflow-y: auto;
+}
+
+.locations-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.locations-list::-webkit-scrollbar-track {
+    background: rgba(31, 31, 31, 0.5);
+    border-radius: 10px;
+}
+
+.locations-list::-webkit-scrollbar-thumb {
+    background: #F5DCE0;
+    border-radius: 10px;
+}
+
+.locations-list::-webkit-scrollbar-thumb:hover {
+    background: #f7cbd2;
+}
+
+.locations-list h4 {
+    margin: 1vh 0 0.5vh;
+    color: #F5DCE0;
+}
+
+.locations-list ul {
+    list-style: none;
+    padding-left: 1vw;
 }

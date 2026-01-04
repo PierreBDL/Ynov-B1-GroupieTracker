@@ -36,8 +36,13 @@
                     
                     <p class="info"><strong>Lieux de concert:</strong></p>
                     <ul class="locations-list">
-                        {{range .Lieux.Locations}}
-                            <li>{{.}}</li>
+                        {{range $location, $dates := .Relation.DatesLocations}}
+                            <h4>{{ $location }}</h4>
+                            <ul>
+                                {{range $dates}}
+                                    <li>{{ . }}</li>
+                                {{end}}
+                            </ul>
                         {{end}}
                     </ul>
                 </div>
