@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/commun.css">
     <link rel="stylesheet" href="/assets/css/artists.css">
     <link rel="icon" href="/assets/img/Logo-sans-fond.png">
+    <script src="/assets/javascript/concerts.js" defer></script>
 </head>
 <body>
     <main>
@@ -37,7 +38,7 @@
                     <p class="info"><strong>Lieux de concert:</strong></p>
                     <ul class="locations-list">
                         {{range $location, $dates := .Relation.DatesLocations}}
-                            <h4>{{ $location }}</h4>
+                            <h4 class="localisation">{{ $location }}</h4>
                             <ul>
                                 {{range $dates}}
                                     <li>{{ . }}</li>
