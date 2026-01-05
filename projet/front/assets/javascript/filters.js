@@ -72,6 +72,12 @@ btn_reset_filters.addEventListener('click', () => {
     // Date premier album
     const premier_album_filtre = document.getElementById("filter_album");
     premier_album_filtre.value = "";
+
+    // Affichage de toutes les cartes
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.style.display = "flex";
+    });
 });
 
 

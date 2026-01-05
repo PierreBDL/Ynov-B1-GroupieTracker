@@ -17,7 +17,6 @@ header {
     z-index: 1000;
     padding: 2vh 0;
     background-color: #1a0f1f ;
-    backdrop-filter: blur(10px);
 }
 
 header nav {
