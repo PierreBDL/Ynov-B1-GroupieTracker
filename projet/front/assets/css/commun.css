@@ -122,3 +122,19 @@ footer {
 footer div {
     text-align: center;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+    header nav {
+        grid-template-columns: 1fr auto;
+    }
+
+    #barre-recherche {
+        flex-direction: column;
+        gap: 1vh;
+    }
+
+    #barre-recherche input {
+        max-width: 100%;
+    }
+}

@@ -76,6 +76,13 @@ btn_reset_filters.addEventListener('click', () => {
     // Ville et pays
     const filter_place_concert = document.getElementById('filter_place_concert');
     filter_place_concert.value = "";
+
+    // Réafficher toutes les cartes
+    const groupes = document.querySelectorAll('.card');
+
+    groupes.forEach(groupe => {
+        groupe.style.display = "flex";
+    });
 });
 
 
