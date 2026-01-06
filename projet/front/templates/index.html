@@ -88,6 +88,9 @@
                     {{range .Members}}
                     <li class="member">{{.}}</li>
                     {{end}}
+                    {{range $location, $dates := .Concerts}}
+                    <li class="localisation">{{ $location }}</li>
+                    {{end}}
                 </ul>
                 <a href="/artist/?id={{.Id}}"> <button class="btn-voir-plus" type="button">Voir plus</button> </a>
             </div>
@@ -107,5 +110,6 @@
 
     <script src="/assets/javascript/search.js" defer></script>
     <script src="/assets/javascript/filters.js" defer></script>
+    <script src="/assets/javascript/concerts.js" defer></script>
 </body>
 </html>

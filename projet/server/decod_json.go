@@ -8,12 +8,13 @@ import (
 // Structure des données des artistes
 
 type artistes struct {
-	Id         int      `json:"id"`
-	Image      string   `json:"image"`
-	Name       string   `json:"name"`
-	Members    []string `json:"members"`
-	Creation   int      `json:"creationDate"`
-	FirstAlbum string   `json:"firstAlbum"`
+	Id         int                 `json:"id"`
+	Image      string              `json:"image"`
+	Name       string              `json:"name"`
+	Members    []string            `json:"members"`
+	Creation   int                 `json:"creationDate"`
+	FirstAlbum string              `json:"firstAlbum"`
+	Concerts   map[string][]string // Lieux de concerts avec leurs dates
 }
 
 // Parser les artistes
@@ -73,4 +74,17 @@ func ParseRelations(data_to_parse []byte) []relation {
 	}
 	// On retourne la liste des relations
 	return Relations.Index
+}
+
+// Relier concerts aux artistes
+func RelierConcerts(artists []artistes, relations []relation) []artistes {
+	for i := range artists {
+		for _, relationRelier := range relations {
+			if artists[i].Id == relationRelier.Id {
+				artists[i].Concerts = relationRelier.DatesLocations
+				break
+			}
+		}
+	}
+	return artists
 }

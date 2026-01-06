@@ -69,6 +69,9 @@ func main() {
 	// Parser les relations
 	relations := ParseRelations(apis["relation"])
 
+	// Relier concerts aux artistes
+	artists = RelierConcerts(artists, relations)
+
 	// Lire fichiers CSS et Images
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("../front/assets"))))
 

@@ -73,11 +73,9 @@ btn_reset_filters.addEventListener('click', () => {
     const premier_album_filtre = document.getElementById("filter_album");
     premier_album_filtre.value = "";
 
-    // Affichage de toutes les cartes
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.style.display = "flex";
-    });
+    // Ville et pays
+    const filter_place_concert = document.getElementById('filter_place_concert');
+    filter_place_concert.value = "";
 });
 
 
@@ -97,6 +95,7 @@ btn_apply_filters.addEventListener('click', () => {
         let annee = true;
         let membres = true;
         let album = true;
+        let concert = true;
 
         // Années
         const annee_debut = parseInt(groupe.querySelector('.annee_debut').textContent);
@@ -146,8 +145,27 @@ btn_apply_filters.addEventListener('click', () => {
             }
         }
 
+        // Ville et pays de concert
+        const lieu_concert_card = groupe.querySelectorAll(".localisation");
+        const filter_lieu_concert = document.getElementById('filter_place_concert');
+
+        if (filter_lieu_concert.value != "") {
+            let trouve = false;
+            lieu_concert_card.forEach(place => {
+                if (place.textContent.toLocaleLowerCase().includes(filter_lieu_concert.value.toLocaleLowerCase())) {
+                    trouve = true;
+                }
+            });
+
+            if (trouve == true) {
+                concert = true;
+            } else {
+                concert = false;
+            }
+        }
+
         // Garde la carte si tous les bool sont toujours à true
-        if (annee == true && membres == true && album == true) {
+        if (annee == true && membres == true && album == true && concert == true) {
             // Affiche la carte
             groupe.style.display = "flex";
         } else {
