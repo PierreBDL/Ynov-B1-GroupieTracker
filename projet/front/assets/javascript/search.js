@@ -33,9 +33,13 @@ function research() {
     cards.forEach(card => {
         const title = card.querySelector(".title");
         const members = card.querySelectorAll('.member');
+        const creationDate = card.querySelector(".annee_debut");
+        const firstAlbum = card.querySelector(".premier_album");
 
         let isTitle = false;
         let isMember = false;
+        let isCreationDate = false;
+        let isFirstAlbum = false;
 
         // Correspondances
         let NomResult = "";
@@ -57,8 +61,22 @@ function research() {
             }
         });
 
+        // Regarder si la date de création est recherchée
+        if (creationDate.innerText.toLowerCase().includes(search.toLowerCase())) {
+            isCreationDate = true;
+            NomResult = creationDate.innerText;
+            typeResult = "Création";
+        }
+
+        // Regarder si le premier album est recherché
+        if (firstAlbum.innerText.toLowerCase().includes(search.toLowerCase())) {
+            isFirstAlbum = true;
+            NomResult = firstAlbum.innerText;
+            typeResult = "Premier album";
+        }
+
         // Si recherché => affiche sinon non
-        if (isTitle == true || isMember == true) {
+        if (isTitle == true || isMember == true || isCreationDate == true || isFirstAlbum == true) {
             card.style.display = "flex";
 
             // Ajouter aux correspondances
