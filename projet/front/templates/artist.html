@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +10,19 @@
     <link rel="stylesheet" href="/assets/css/artists.css">
     <link rel="icon" href="/assets/img/Logo-sans-fond.png">
     <script src="/assets/javascript/concerts.js" defer></script>
+
+    <!-- Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="/assets/javascript/map.js" defer></script>
 </head>
+
 <body>
+
     <main>
+
         <div class="card">
             <div class="card-header">
                 <div id="header-content">
@@ -22,6 +34,7 @@
                 </div>
                 <hr>
             </div>
+
             <div class="content">
                 <img src="{{.Artiste.Image}}" alt="{{.Artiste.Name}}" class="image">
                 <div class="details">
@@ -39,7 +52,7 @@
                     <ul class="locations-list">
                         {{range $location, $dates := .Relation.DatesLocations}}
                             <h4 class="localisation">{{ $location }}</h4>
-                            <ul>
+                            <ul class="dates-list">
                                 {{range $dates}}
                                     <li>{{ . }}</li>
                                 {{end}}
@@ -48,7 +61,11 @@
                     </ul>
                 </div>
             </div>
+
+            <div id="map" style="height:400px"></div>
+
         </div>
+
         <div></div>
     </main>
 
@@ -59,4 +76,5 @@
         </div>
     </footer>
 </body>
+
 </html>
