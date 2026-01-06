@@ -6,7 +6,7 @@ localisations.forEach(localisation => {
 
     // Majuscule pour la ville et le pays
     lieu[0] = lieu[0][0].toUpperCase() + lieu[0].slice(1);
-    lieu[1] = lieu[1][0].toUpperCase() + lieu[1].slice(1);
+    lieu[1] = lieu[1].toUpperCase();
 
     // Recollage du texte
     localisation.textContent = lieu[0] + ', ' + lieu[1];
