@@ -239,8 +239,8 @@ main {
 
 #cards{
     min-height: 80vh;
-    margin: 5vh 5vw;
-    padding: 15vh 5vw 15vh;
+    margin: 0vh 5vw 5vh 5vw;
+    padding: 0vh 5vw 15vh 5vw;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2vw;

@@ -10,7 +10,7 @@ html, body {
 /* Header */
 
 header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -67,7 +67,6 @@ header .nav-left img {
     font-weight: 600;
     font-size: 1.1rem;
     color: #1a0f1f;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #barre-recherche input {
@@ -87,21 +86,14 @@ header .nav-left img {
     padding: 1.2vh 2.5vw;
     border-radius: 20px;
     font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 #barre-recherche button:hover {
     background-color: #1a0f1f;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-#barre-recherche button:active {
-    transform: translateY(0);
 }
 
 /* Footer */

@@ -107,6 +107,12 @@ func main() {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})
 
+	// Page crédits
+	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
+		tmpl := template.Must(template.ParseFiles("../front/templates/credits.html"))
+		tmpl.Execute(w, r)
+	})
+
 	// Lancement serveur
 	http.ListenAndServe(":8080", nil)
 }
