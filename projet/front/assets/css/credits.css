@@ -3,7 +3,7 @@ body {
 }
 
 main {
-    color : #F5DCE0;
+    color : white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@ main {
 
 #content {
     background-color: #1f1f1f;
-    border: 1px solid #F5DCE0;
+    border: 1px solid white;
     padding: 3vh 3vw 3vh 3vw;
     border-radius: 20px;
     max-width: 60vw;
@@ -41,15 +41,15 @@ main {
     font-size: 1rem;
     border: none;
     border-radius: 10px;
-    background-color: #F5DCE0;
-    color: #1a0f1f;
+    background-color: white;
+    color: #211e23;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 #content-header-title button:hover {
-    background-color: #1a0f1f;
-    color: #F5DCE0;
+    background-color: #211e23;
+    color: white;
     transform: translateY(-2px);
 }
 
@@ -57,13 +57,13 @@ h1 {
     text-align: center;
     font-size: 3rem;
     margin-bottom: 2vh;
-    color: #F5DCE0;
+    color: white;
 }
 
 
 
 #content a {
-    color: #F5DCE0;
+    color: white;
 }
 
 /* Media Queries */

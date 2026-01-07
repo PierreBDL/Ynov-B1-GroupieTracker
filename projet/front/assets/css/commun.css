@@ -1,10 +1,10 @@
 html, body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #F0F8FF;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
     box-sizing: border-box;
-    background-color: #1a0f1f;
+    background-color: #46494C;
 }
 
 /* Header */
@@ -16,7 +16,7 @@ header {
     right: 0;
     z-index: 1000;
     padding: 2vh 0;
-    background-color: #1a0f1f ;
+    background-color: #46494C;
 }
 
 header nav {
@@ -24,18 +24,20 @@ header nav {
     max-width: 75vw;
     width: 90%;
     border: solid 2px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(135deg, #F5DCE0 0%, #F5DCE0 100%);
+    background: #39373b;
     border-radius: 25px;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     padding: 1.5vh 3vw;
     gap: 2vw;
-    box-shadow: 0 8px 32px rgba(255, 42, 173, 0.3);
+    color: white;
+    box-shadow: 0 8px 32px rgba(31, 33, 35, 0.3);
+    z-index: 1001;
 }
 
 header nav:hover {
-    box-shadow: 0 12px 48px rgba(255, 42, 173, 0.4);
+    box-shadow: 0 12px 48px rgba(31, 33, 35, 0.4);
     transform: translateY(-2px);
 }
 
@@ -66,7 +68,7 @@ header .nav-left img {
 #barre-recherche label {
     font-weight: 600;
     font-size: 1.1rem;
-    color: #1a0f1f;
+    color: white;
 }
 
 #barre-recherche input {
@@ -81,7 +83,7 @@ header .nav-left img {
 
 #barre-recherche button {
     background-color: white;
-    color: #1a0f1f;
+    color: black;
     border: none;
     padding: 1.2vh 2.5vw;
     border-radius: 20px;
@@ -91,7 +93,7 @@ header .nav-left img {
 }
 
 #barre-recherche button:hover {
-    background-color: #1a0f1f;
+    background-color: black;
     color: white;
     transform: translateY(-2px);
 }
@@ -103,16 +105,27 @@ footer {
     bottom: 0;
     width: 100%;
     height: 10vh;
-    background-color: #F5DCE0;
+    background-color: #39373b;
     display: flex;
     justify-content: center;
     align-items: center;
     border-top: solid 2px black;
     margin-top: 5vh;
+    z-index: 9999;
 }
 
 footer div {
     text-align: center;
+}
+
+footer a {
+    color: white;
+    font-weight: 600;
+}
+
+footer p {
+    color: #C5C3C6;
+    font-size: 0.9rem;
 }
 
 /* Media Queries */
