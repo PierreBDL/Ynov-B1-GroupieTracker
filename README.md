@@ -12,6 +12,7 @@ Site web qui centralise les informations des groupes de musique récupéré depu
   - Par date du premier album
   - Par lieu de concert (ville ou pays)
 - **Page détaillée** : Affichage complet des informations d'un artiste avec ses dates et lieux de concerts
+- **Carte Interractive** : Visualisation des lieux de concerts grâce à une carte interractive OpenStreetMap
 
 ## 🛠️ Technologies utilisées
 
@@ -44,15 +45,18 @@ groupie-tracker/
     │   │   ├── css/
     │   │   │   ├── artists.css
     │   │   │   ├── commun.css
+    │   │   │   ├── credits.css
     │   │   │   └── index.css
     │   │   ├── img/
     │   │   │   └── Logo-sans-fond.png
     │   │   └── javascript/
     │   │       ├── concerts.js
     │   │       ├── filters.js
+    |   |       ├── map.js
     │   │       └── search.js
     │   └── templates/
     │       ├── artist.html
+    │       ├── credits.html
     │       └── index.html
     └── server/
         ├── decod_json.go
@@ -116,6 +120,7 @@ Utilisez la barre de recherche pour trouver un artiste par son nom
 - **search.js** : Logique de recherche d'artistes
 - **filters.js** : Gestion des filtres et affichage/masquage des cartes
 - **concerts.js** : Formatage des noms de lieux pour l'affichage
+- **map.js** : Pour communiquer avec l'API d'OpenStreetMap et pour créer les épingles.
 
 ## 👥 Auteurs
 Pierre BOURGEOIS DE LAVERGNE
