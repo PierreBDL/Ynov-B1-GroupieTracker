@@ -262,7 +262,7 @@ main {
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    border: #C5C3C6 1px solid;
 }
 
 .image {
@@ -305,11 +305,30 @@ main {
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
-.btn-voir-plus:hover {
+/* Animation de soulignement */
+
+.btn-voir-plus p {
+    position: relative;
+    margin: 0;
+}
+
+.btn-voir-plus p::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 0;
     background-color: black;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    transition: width 0.3s;
+}
+
+.btn-voir-plus p:hover::after {
+    width: 100%;
+}
+
+.btn-voir-plus p.active::after {
+    width: 100%;
 }
 
 
