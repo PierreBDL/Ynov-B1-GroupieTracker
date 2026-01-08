@@ -3,7 +3,7 @@ const localisations = document.querySelectorAll('.localisation');
 localisations.forEach(localisation => {
 
     // Remplace les tirets en virgules et les tirets du bas en espaces
-    let lieu = localisation.textContent.replace('-', ', ').replace('_', ' ');
+    let lieu = localisation.textContent.replaceAll('-', ', ').replaceAll('_', ' ');
 
     // Découpe du texte au niveau de -
     lieu = lieu.split(', ');
