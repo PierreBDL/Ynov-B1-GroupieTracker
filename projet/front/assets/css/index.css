@@ -279,6 +279,7 @@ main {
     margin: 1vh 0;
     font-weight: bold;
     color: white;
+    white-space: nowrap;
 }
 
 .infos {
