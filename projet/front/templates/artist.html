@@ -29,7 +29,7 @@
                     <div></div>
                     <h3 class="title">{{.Artiste.Name}}</h3>
                     <form action="/return">
-                        <button type="submit">Retour à la liste des artistes</button>
+                        <button type="submit"> <p>Retour à la liste des artistes</p></button>
                     </form>
                 </div>
                 <hr>
@@ -48,7 +48,7 @@
                         {{end}}
                     </ul>
                     
-                    <p class="info"><strong>Lieux de concert:</strong></p>
+                    <div class="info-lieux"><strong>Lieux de concert:</strong> <a href="#map"><p>Carte</p></a></div>
                     <ul class="locations-list">
                         {{range $location, $dates := .Relation.DatesLocations}}
                             <h4 class="localisation">{{ $location }}</h4>

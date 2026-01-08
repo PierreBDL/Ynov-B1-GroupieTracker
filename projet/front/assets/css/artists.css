@@ -73,7 +73,7 @@ hr {
     box-shadow: 0 4px 12px rgba(57, 55, 59, 0.15);
 }
 
-.infos {
+.infos, .info-lieux {
     font-size: 1.1rem;
     margin: 1.5vh 0;
     line-height: 1.6;
@@ -85,13 +85,58 @@ hr {
     margin-top: 1vh;
 }
 
-.members_names {
-    padding: 0.5vh 1vw;
-    margin: 0.5vh 0 0;
-    border-radius: 8px;
+.info-lieux {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 1vw;
+    margin-top: 2vh;
 }
 
-main form button {
+.info-lieux {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+/* Animation de soulignement */
+
+.info-lieux a {
+    max-height: 40%;
+    max-width: 20%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+main form button p, .info-lieux a p {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.info-lieux a p::after, main form button p::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 0;
+    height: 2px;
+    background-color: #1f1f1f;
+    transition: width 1s;
+}
+
+.info-lieux a p:hover::after, main form button p:hover::after {
+    width: 100%;
+}
+
+.info-lieux a p.active::after, main form button p.active::after {
+    width: 100%;
+}
+
+main form button, .info-lieux a {
     background-color: #C5C3C6;
     color: #1f1f1f;
     border: none;
@@ -101,13 +146,6 @@ main form button {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 4px 12px rgba(57, 55, 59, 0.3);
-}
-
-main form button:hover {
-    background-color: #211e23;
-    color: #C5C3C6;
-    transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(57, 55, 59, 0.3);
 }
 
