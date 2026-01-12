@@ -11,6 +11,7 @@ Site web qui centralise les informations des groupes de musique récupéré depu
   - Par nombre de membres (0-10)
   - Par date du premier album
   - Par lieu de concert (ville ou pays)
+- **Recommandations** : Affichage des recommandations pour compléter la recherche
 - **Page détaillée** : Affichage complet des informations d'un artiste avec ses dates et lieux de concerts
 - **Carte Interractive** : Visualisation des lieux de concerts grâce à une carte interractive OpenStreetMap
 
@@ -92,6 +93,7 @@ Ouvrez votre navigateur et allez sur : [http://localhost:8080](http://localhost:
 - Visualisez tous les artistes sous forme de cartes
 - Utilisez les filtres sur le côté gauche pour affiner votre recherche
 - Cliquez sur "Voir plus" pour accéder à la page détaillée d'un artiste
+- Cliquer sur "Crédits" pour voir les crédits du site
 
 ### Filtres
 - **Années de début** : Sélectionnez une décennie

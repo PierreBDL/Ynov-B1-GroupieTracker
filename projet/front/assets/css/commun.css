@@ -179,4 +179,12 @@ footer p {
     #barre-recherche input {
         max-width: 100%;
     }
+
+    .recommandations {
+        max-width: 90vw;
+    }
+
+    .recommandations ul li {
+        font-size: 3vw;
+    }
 }
