@@ -4,9 +4,7 @@ const cards = document.querySelectorAll('.card');
 
 // Eviter autocomplétion en boucle
 let isDeleting = false;
-
-// Autocomplétion désactivée si correspondance unique
-
+let isAutoCompleting = false;
 
 // Fonction de recherche
 function research() {
@@ -14,10 +12,16 @@ function research() {
     searchInput.addEventListener('keydown', (event) => {
         if (event.key === "Backspace" || event.key === "Delete") {
             isDeleting = true;
+            isAutoCompleting = false;
         } else {
             isDeleting = false;
         }
     });
+
+    // S'il y a une autocompletion, on ne recherche pas
+    if (isAutoCompleting) {
+        return;
+    }
 
     const search = searchInput.value; // Récupérer la valeur au moment de la recherche
     let correspondances = []; // Correspondances recherches
@@ -92,6 +96,7 @@ function research() {
     // Si une seule correspondance
     if (correspondances.length == 1 && isDeleting == false) {
         searchInput.value = correspondances[0];
+        isAutoCompleting = true;
     }
 }
 
