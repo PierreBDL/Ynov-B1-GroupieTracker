@@ -79,7 +79,7 @@ func main() {
 		"/assets/",
 		http.StripPrefix(
 			"/assets/",
-			http.FileServer(http.Dir("../front/assets")),
+			http.FileServer(http.Dir("front/assets")),
 		),
 	)
 
@@ -113,7 +113,7 @@ func main() {
 
 	// credits
 	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("../front/templates/credits.html")
+		tmpl, err := template.ParseFiles("front/templates/index.html")
 		if err != nil {
 			log.Println("Template error:", err)
 			http.Error(w, "Template not found", 500)
@@ -141,7 +141,7 @@ func main() {
 
 // Afficher l'écran d'accueil
 func afficherAccueil(w http.ResponseWriter, data donnees) {
-	tmpl, err := template.ParseFiles("../front/templates/index.html")
+	tmpl, err := template.ParseFiles("front/templates/index.html")
 	if err != nil {
 		log.Println("Template error:", err)
 		http.Error(w, "Template not found", 500)
@@ -185,7 +185,7 @@ func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
 		Relation: donneesRelation,
 	}
 
-	tmpl, err := template.ParseFiles("../front/templates/artist.html")
+	tmpl, err := template.ParseFiles("front/templates/artist.html")
 	if err != nil {
 		log.Println("Template error:", err)
 		http.Error(w, "Template not found", 500)
