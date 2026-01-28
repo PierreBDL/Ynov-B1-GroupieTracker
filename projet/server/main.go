@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -30,6 +31,24 @@ type donnesprecises struct {
 }
 
 func main() {
+
+	// Hébergement Scalingo
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	// Sert les fichiers statiques du front
+	fs := http.FileServer(http.Dir("../front"))
+	http.Handle("/", fs)
+
+	// Exemple d’API
+	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("API is working"))
+	})
+
+	http.ListenAndServe(":"+port, nil)
+
 	// URLs des APIs
 	urlsAPIs := map[string]string{
 		"artistes": "https://groupietrackers.herokuapp.com/api/artists",
