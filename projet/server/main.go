@@ -107,7 +107,7 @@ func main() {
 
 // Afficher l'écran d'accueil
 func afficherAccueil(w http.ResponseWriter, data donnees) {
-	tmpl := template.Must(template.ParseFiles("../front/templates/index.html"))
+	tmpl := template.Must(template.ParseFiles("projet/front/templates/index.html"))
 	tmpl.Execute(w, data)
 }
 
