@@ -129,6 +129,9 @@ func main() {
 
 	log.Println("Listening on port", port)
 
+	cwd, _ := os.Getwd()
+	log.Println("CURRENT WORKDIR =", cwd)
+
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
