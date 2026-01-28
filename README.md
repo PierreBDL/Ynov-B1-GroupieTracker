@@ -125,6 +125,7 @@ Utilisez la barre de recherche pour trouver un artiste par son nom
 - **map.js** : Pour communiquer avec l'API d'OpenStreetMap et pour créer les épingles.
 
 ### Hébergé sur Scalingo
+Ce site est hébergé sur Scalingo
 
 ## 👥 Auteurs
 Pierre BOURGEOIS DE LAVERGNE
