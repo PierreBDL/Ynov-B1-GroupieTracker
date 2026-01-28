@@ -1,3 +1,3 @@
 module pomme_d_api
 
-go 1.24.7
+go 1.22.2
