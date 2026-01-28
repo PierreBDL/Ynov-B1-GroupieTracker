@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -32,24 +32,15 @@ type donnesprecises struct {
 
 func main() {
 
-	// Hébergement Scalingo
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 
-	// Sert les fichiers statiques du front
-	fs := http.FileServer(http.Dir("../front"))
-	http.Handle("/", fs)
+	// =============================
+	// Appels API au démarrage
+	// =============================
 
-	// Exemple d’API
-	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("API is working"))
-	})
-
-	http.ListenAndServe(":"+port, nil)
-
-	// URLs des APIs
 	urlsAPIs := map[string]string{
 		"artistes": "https://groupietrackers.herokuapp.com/api/artists",
 		"lieux":    "https://groupietrackers.herokuapp.com/api/locations",
@@ -57,44 +48,36 @@ func main() {
 		"relation": "https://groupietrackers.herokuapp.com/api/relation",
 	}
 
-	// Appel de toutes les APIs et récup des données
 	for nom, url := range urlsAPIs {
-		fmt.Println("Appel de l'API :", nom)
 		resp, err := http.Get(url)
 		if err != nil {
-			fmt.Println("Erreur lors de la requête HTTP pour : ", err, "\n")
-			return
+			log.Fatal(err)
 		}
 
-		body, err := ioutil.ReadAll(resp.Body)
+		body, _ := ioutil.ReadAll(resp.Body)
 		resp.Body.Close()
-		if err != nil {
-			fmt.Println("Erreur lors de la lecture de la réponse: ", err, "\n")
-			return
-		}
-
-		fmt.Println(string(body))
-
-		// Ajout des données dans le tableau
 		apis[nom] = body
 	}
 
-	// Parser les artistes
 	artists := ParseArtistes(apis["artistes"])
-
-	// Parser les lieux
 	lieux := ParseLieux(apis["lieux"])
-
-	// Parser les relations
 	relations := ParseRelations(apis["relation"])
-
-	// Relier concerts aux artistes
 	artists = RelierConcerts(artists, relations)
 
-	// Lire fichiers CSS et Images
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("../front/assets"))))
+	// =============================
+	// ROUTES
+	// =============================
 
-	// Htaccess
+	// assets
+	http.Handle(
+		"/assets/",
+		http.StripPrefix(
+			"/assets/",
+			http.FileServer(http.Dir("projet/front/assets")),
+		),
+	)
+
+	// accueil
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
 			http.NotFound(w, r)
@@ -103,37 +86,23 @@ func main() {
 		afficherAccueil(w, donnees{Artists: artists, Lieux: lieux, Relation: relations})
 	})
 
-	// Route pour la page d'un artiste si "voir plus"
 	http.HandleFunc("/artist/", func(w http.ResponseWriter, r *http.Request) {
-		// Récupération des paramètres de l'URL avec net/url
-		parametres := r.URL.Query()
-
-		// Récupération de l'id
-		id := parametres.Get("id")
-
-		// Conversion en int
-		id_int, err := strconv.Atoi(id)
-		if err != nil {
-			panic(err)
-		}
-
-		// Afficher page de l'artiste
-		afficherArtiste(w, donnees{Artists: artists, Lieux: lieux, Relation: relations}, id_int)
+		id, _ := strconv.Atoi(r.URL.Query().Get("id"))
+		afficherArtiste(w, donnees{Artists: artists, Lieux: lieux, Relation: relations}, id)
 	})
 
-	// Retour à l'accueil depuis la page artiste
+	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
+		tmpl := template.Must(template.ParseFiles("projet/front/templates/credits.html"))
+		tmpl.Execute(w, nil)
+	})
+
 	http.HandleFunc("/return", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})
 
-	// Page crédits
-	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
-		tmpl := template.Must(template.ParseFiles("../front/templates/credits.html"))
-		tmpl.Execute(w, r)
-	})
+	log.Println("Listening on port", port)
 
-	// Lancement serveur
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+port, nil)
 }
 
 // Afficher l'écran d'accueil
