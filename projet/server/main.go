@@ -51,11 +51,17 @@ func main() {
 	for nom, url := range urlsAPIs {
 		resp, err := http.Get(url)
 		if err != nil {
-			log.Fatal(err)
+			log.Println("API error:", nom, err)
+			continue
 		}
 
-		body, _ := ioutil.ReadAll(resp.Body)
+		body, err := ioutil.ReadAll(resp.Body)
 		resp.Body.Close()
+		if err != nil {
+			log.Println("Read error:", err)
+			continue
+		}
+
 		apis[nom] = body
 	}
 
@@ -68,7 +74,7 @@ func main() {
 	// ROUTES
 	// =============================
 
-	// assets
+	// assets statiques
 	http.Handle(
 		"/assets/",
 		http.StripPrefix(
@@ -83,41 +89,72 @@ func main() {
 			http.NotFound(w, r)
 			return
 		}
-		afficherAccueil(w, donnees{Artists: artists, Lieux: lieux, Relation: relations})
+		afficherAccueil(w, donnees{
+			Artists:  artists,
+			Lieux:    lieux,
+			Relation: relations,
+		})
 	})
 
+	// page artiste
 	http.HandleFunc("/artist/", func(w http.ResponseWriter, r *http.Request) {
-		id, _ := strconv.Atoi(r.URL.Query().Get("id"))
-		afficherArtiste(w, donnees{Artists: artists, Lieux: lieux, Relation: relations}, id)
+		id, err := strconv.Atoi(r.URL.Query().Get("id"))
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+
+		afficherArtiste(w, donnees{
+			Artists:  artists,
+			Lieux:    lieux,
+			Relation: relations,
+		}, id)
 	})
 
+	// credits
 	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
-		tmpl := template.Must(template.ParseFiles("projet/front/templates/credits.html"))
+		tmpl, err := template.ParseFiles("projet/front/templates/credits.html")
+		if err != nil {
+			log.Println("Template error:", err)
+			http.Error(w, "Template not found", 500)
+			return
+		}
 		tmpl.Execute(w, nil)
 	})
 
+	// retour accueil
 	http.HandleFunc("/return", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})
 
 	log.Println("Listening on port", port)
 
-	http.ListenAndServe(":"+port, nil)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
+
+// =============================
+// TEMPLATES
+// =============================
 
 // Afficher l'écran d'accueil
 func afficherAccueil(w http.ResponseWriter, data donnees) {
-	tmpl := template.Must(template.ParseFiles("projet/front/templates/index.html"))
+	tmpl, err := template.ParseFiles("projet/front/templates/index.html")
+	if err != nil {
+		log.Println("Template error:", err)
+		http.Error(w, "Template not found", 500)
+		return
+	}
+
 	tmpl.Execute(w, data)
 }
 
 // Afficher page de l'artiste
 func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
+
 	donneesArtiste := artistes{}
 	donneesLieux := lieux{}
 	donneesRelation := relation{}
 
-	// On cherche l'artiste avec l'id
 	for _, artist := range data.Artists {
 		if artist.Id == id {
 			donneesArtiste = artist
@@ -125,7 +162,6 @@ func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
 		}
 	}
 
-	// On cherche les lieux avec l'id
 	for _, lieu := range data.Lieux {
 		if lieu.Id == id {
 			donneesLieux = lieu
@@ -133,7 +169,6 @@ func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
 		}
 	}
 
-	// On cherche les relations avec l'id
 	for _, relation := range data.Relation {
 		if relation.Id == id {
 			donneesRelation = relation
@@ -141,14 +176,18 @@ func afficherArtiste(w http.ResponseWriter, data donnees, id int) {
 		}
 	}
 
-	// Fusionner les données artistes et lieux
 	dataPrecises := donnesprecises{
 		Artiste:  donneesArtiste,
 		Lieux:    donneesLieux,
 		Relation: donneesRelation,
 	}
 
-	// Affichage de la page de l'artiste
-	tmpl := template.Must(template.ParseFiles("../front/templates/artist.html"))
+	tmpl, err := template.ParseFiles("projet/front/templates/artist.html")
+	if err != nil {
+		log.Println("Template error:", err)
+		http.Error(w, "Template not found", 500)
+		return
+	}
+
 	tmpl.Execute(w, dataPrecises)
 }
