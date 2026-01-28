@@ -124,7 +124,7 @@ Utilisez la barre de recherche pour trouver un artiste par son nom
 - **concerts.js** : Formatage des noms de lieux pour l'affichage
 - **map.js** : Pour communiquer avec l'API d'OpenStreetMap et pour créer les épingles.
 
-### Hébergé sur Scalingo
+### Hébergement sur Scalingo
 Ce site est hébergé sur Scalingo
 
 ## 👥 Auteurs
